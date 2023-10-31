@@ -18,15 +18,6 @@ const Day = ({ date, events, openModal, deleteEvent, editEvent }) => {
           <p className="px-2 truncate">{event.name}</p>
           <p className="px-2 truncate">{event.time}</p>
           <p className="px-2 truncate">{event.invitees}</p>
-          {/* <button
-            className="bg-red-600 rounded-lg px-2 md:ml-1 text-xs md:text-base"
-            onClick={(e) => {
-              e.stopPropagation();
-              deleteEvent(index);
-            }}
-          >
-            Delete
-          </button> */}
         </div>
       ));
     } else {
