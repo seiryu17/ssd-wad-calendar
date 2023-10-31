@@ -100,16 +100,20 @@ const Calendar = () => {
     localStorage.setItem("events", JSON.stringify(allEvents));
   };
 
-  const deleteEvent = (day, index) => {
-    const selectedDayString = day.toDateString();
+  const deleteEvent = (id) => {
+    const selectedDayString = selectedDay.toDateString();
     const storedEvents = localStorage.getItem("events");
     if (storedEvents) {
       const allEvents = JSON.parse(storedEvents);
       if (allEvents[selectedDayString]) {
-        allEvents[selectedDayString].splice(index, 1);
+        const updatedEvents = allEvents[selectedDayString].filter(
+          (event) => event.id !== id
+        );
+        allEvents[selectedDayString] = updatedEvents;
         localStorage.setItem("events", JSON.stringify(allEvents));
-        setEvents([...allEvents[selectedDayString]]);
+        setEvents(updatedEvents);
       }
+      closeModal();
     }
   };
 
@@ -169,7 +173,6 @@ const Calendar = () => {
             date={day}
             openModal={() => openModal(day)}
             events={dayEvents}
-            deleteEvent={(index) => deleteEvent(day, index)}
             editEvent={(index) => editEvent(day, index)}
           />
         );
@@ -201,6 +204,7 @@ const Calendar = () => {
           events={events}
           closeModal={closeModal}
           addEvent={addEvent}
+          deleteEvent={(id) => deleteEvent(id)}
           saveEditEvent={saveEditEvent}
         />
       </Modal>

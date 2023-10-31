@@ -1,6 +1,12 @@
 import React, { useState } from "react";
 
-const Event = ({ addEvent, saveEditEvent, closeModal, eventData }) => {
+const Event = ({
+  addEvent,
+  saveEditEvent,
+  closeModal,
+  eventData,
+  deleteEvent,
+}) => {
   const [eventName, setEventName] = useState(eventData ? eventData.name : "");
   const [eventTime, setEventTime] = useState(eventData ? eventData.time : "");
   const [eventInvitees, setEventInvitees] = useState(
@@ -54,8 +60,19 @@ const Event = ({ addEvent, saveEditEvent, closeModal, eventData }) => {
         />
         <div className="flex gap-3 justify-end">
           <button onClick={closeModal}>Cancel</button>
+          {eventData && (
+            <button
+              className="bg-red-600 rounded-lg px-2 md:ml-1 text-xs md:text-base text-white"
+              onClick={(e) => {
+                e.stopPropagation();
+                deleteEvent(eventData.id);
+              }}
+            >
+              Delete
+            </button>
+          )}
           <button
-            className="bg-blue-500 rounded-full px-2 py-1 text-white"
+            className="bg-blue-500 rounded-lg px-2 py-1 text-white"
             type="submit"
           >
             {eventData ? "Save Changes" : "Add Event"}

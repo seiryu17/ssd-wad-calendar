@@ -6,6 +6,10 @@ const Day = ({ date, events, openModal, deleteEvent, editEvent }) => {
       return events.map((event, index) => (
         <div
           key={index}
+          onClick={(e) => {
+            e.stopPropagation();
+            editEvent(index);
+          }}
           className={`event divide-y ${
             index !== events.length - 1 ? "mb-2" : ""
           }`}
@@ -14,16 +18,7 @@ const Day = ({ date, events, openModal, deleteEvent, editEvent }) => {
           <p className="px-2 truncate">{event.name}</p>
           <p className="px-2 truncate">{event.time}</p>
           <p className="px-2 truncate">{event.invitees}</p>
-          <button
-            className="bg-yellow-500 rounded-lg px-2 text-xs md:text-base"
-            onClick={(e) => {
-              e.stopPropagation();
-              editEvent(index);
-            }}
-          >
-            Edit
-          </button>
-          <button
+          {/* <button
             className="bg-red-600 rounded-lg px-2 md:ml-1 text-xs md:text-base"
             onClick={(e) => {
               e.stopPropagation();
@@ -31,7 +26,7 @@ const Day = ({ date, events, openModal, deleteEvent, editEvent }) => {
             }}
           >
             Delete
-          </button>
+          </button> */}
         </div>
       ));
     } else {
