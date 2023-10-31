@@ -188,8 +188,8 @@ const Calendar = () => {
       </div>
       <div className="days grid grid-cols-7 gap-2 mt-3">
         {daysName.map((day) => (
-          <div key={day} className="day font-semibold text-center">
-            {day}
+          <div key={day.name} className="day font-semibold text-center">
+            {day.shortName}
           </div>
         ))}
       </div>
